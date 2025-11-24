@@ -6,7 +6,7 @@ import Products from './pages/Products'
 import Cart from './pages/Cart'
 import Navbar from './components/Navbar'
 import MyOrders from './pages/MyOrders'
-import { useAppContext } from './context/AppContext'
+import { useAppContext } from './context/AppContext.jsx'
 import Auth from './modals/Auth'
 function App() {
   const { showUserLogin, isSeller } = useAppContext();
