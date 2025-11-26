@@ -12,6 +12,11 @@ import Footer from './components/Footer.jsx'
 import { Toaster } from 'react-hot-toast'
 import SingleProduct from './pages/SingleProduct.jsx'
 import AddAddress from './pages/AddAddress.jsx'
+import SellerLayout from './pages/seller/SellerLayout.jsx'
+import SellerLogin from './components/seller/SellerLogin.jsx'
+import ProductList from './pages/seller/ProductList.jsx'
+import Orders from './pages/seller/Orders.jsx'
+import Addproduct from './pages/seller/Addproduct.jsx'
 
 function App() {
   const { showUserLogin, isSeller } = useAppContext();
@@ -31,6 +36,17 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/add-address" element={<AddAddress />} />
           <Route path="/my-orders" element={<MyOrders />} />
+          <Route
+           path="/seller"
+           element={isSeller ? <SellerLayout /> : <SellerLogin />}
+          >
+             <Route index element={isSeller ? <Addproduct /> : null} />
+            <Route
+              path="product-list"
+              element={isSeller ? <ProductList /> : null}
+            />
+            <Route path="orders" element={isSeller ? <Orders /> : null} />
+          </Route>
         </Routes>
       </div>
       {isSellerPath ? null : <Footer />}
