@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import { connectDB } from './config/connectDB.js';
 dotenv.config();
+import userRoutes from './routes/user.routes.js';
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
     res.send("Hello World!")
 });
+
+app.use("/api/user", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
