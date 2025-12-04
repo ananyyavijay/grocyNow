@@ -8,6 +8,7 @@ import userRoutes from './routes/user.routes.js';
 import sellerRoutes from './routes/seller.routes.js'
 import productRoutes from './routes/product.routes.js'
 import cartRoutes from './routes/cart.routes.js'
+import orderRoutes from './routes/order.routes.js'
 import { connectCloudinary } from './config/cloudinary.js';
 
 const app = express();
@@ -29,13 +30,14 @@ app.use(cookieParser());
 
 //api endpoints
 app.get("/", (req, res) => {
-    res.send("Hello World!")
+    res.send("let's buy!")
 });
 
 app.use("/api/user", userRoutes);
 app.use("/api/seller", sellerRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/order", orderRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
