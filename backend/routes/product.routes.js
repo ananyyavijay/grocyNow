@@ -9,9 +9,9 @@ import { addProduct,
 
 const router = express.Router();
 
-router.post("/add-product", upload.array("images"), authSeller, addProduct);
+router.post("/add-product", authSeller, upload.array("image"), addProduct);
 router.get("/list", getProducts);
 router.get("/id", getProductById);
-router.get("/stock", authSeller, changeStock)
+router.post("/stock", authSeller, changeStock)
 
 export default router;

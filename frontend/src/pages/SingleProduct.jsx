@@ -46,7 +46,7 @@ const SingleProduct = () => {
                   className="border max-w-24 border-gray-500/30 rounded overflow-hidden cursor-pointer"
                 >
                   <img
-                    src={image}
+                    src={`http://localhost:5000/images/${product.image[0]}`}
                     alt={`Thumbnail ${index + 1}`}
                   />
                 </div>
@@ -55,7 +55,7 @@ const SingleProduct = () => {
 
             <div className="border border-gray-500/30 max-w-100 rounded overflow-hidden">
               <img
-                src={thumbnail}
+                src={`http://localhost:5000/images/${thumbnail}`}
                 alt="Selected product"
               />
             </div>

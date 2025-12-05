@@ -2,8 +2,9 @@ import { assets, categories } from "../../assets/assets";
 import { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
+
 const AddProduct = () => {
-  // const { axios } = useContext(AppContext);
+  const { axios } = useContext(AppContext);
   const [files, setFiles] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -14,8 +15,8 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      const formData = new FormData(); //FormData sends both text and image
 
-      const formData = new FormData();
       formData.append("name", name);
       formData.append("description", description);
       formData.append("category", category);

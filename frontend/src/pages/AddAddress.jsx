@@ -2,9 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const AddAddress = () => {
-  const [address, setAddress] = React.useState({
+  const [address, setAddress] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -23,26 +24,26 @@ const AddAddress = () => {
   const submitHanlder = async (e) => {
     e.preventDefault();
     console.log("address", address);
-    // try {
-    //   e.preventDefault();
-    //   const { data } = await axios.post("/api/address/add", { address });
-    //   console.log("data", data);
-    //   if (data.success) {
-    //     toast.success(data.message);
-    //     navigate("/cart");
-    //   } else {
-    //     toast.error(data.message);
-    //   }
-    // } catch (error) {
-    //   toast.error(error.message);
-    // }
+    try {
+      e.preventDefault();
+      const { data } = await axios.post("/api/address/add", { address });
+      console.log("data", data);
+      if (data.success) {
+        toast.success(data.message);
+        navigate("/cart");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
 
   };
-//   useEffect(() => {
-//     if (!user) {
-//       navigate("/cart");
-//     }
-//   }, []);
+  useEffect(() => {
+    if (!user) {
+      navigate("/cart");
+    }
+  }, []);
   return (
     <div className="mt-12 flex flex-col md:flex-row gap-6 p-6 bg-gray-100 rounded-lg shadow-md">
       {/* Left Side: Address Fields */}

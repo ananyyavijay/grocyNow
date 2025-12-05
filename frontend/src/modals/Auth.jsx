@@ -9,23 +9,49 @@ const Auth = () => {
   const { setShowUserLogin, setUser, axios, navigate } = useAppContext();
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const { data } = await axios.post(`/api/user/${state}`, {
-        name,
-        email,
-        password,
-      });
-      if (data.success) {
-        toast.success(data.message);
-        navigate("/");
-        setUser(data.user);
-        setShowUserLogin(false);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {}
-  };
+  e.preventDefault();
+
+  try {
+    const { data } = await axios.post(`/api/user/${state}`, {
+      name,
+      email,
+      password,
+    });
+
+    if (data.success) {
+      toast.success(data.message);
+      setUser(data.user);
+      navigate("/");
+      setShowUserLogin(false);
+      return;
+    }
+
+  } catch (error) {
+    const message = error.response?.data?.message;
+
+    //  Specific Login errors
+    if (message === "User does not exist") {
+      return toast.error("User not found! Please register first.");
+    }
+    if (message === "Invalid credentials") {
+      return toast.error("Incorrect password! Try again.");
+    }
+
+    //  Specific Register errors
+    if (message === "user already exists") {
+      return toast.error("User already registered! Please login.");
+    }
+
+    //  Field missing case
+    if (message === "please fill all the fields") {
+      return toast.error("All fields are required");
+    }
+
+    //  Fallback for unexpected errors
+    toast.error("Something went wrong. Please try again.");
+  }
+};
+
   return (
     <div
       onClick={() => setShowUserLogin(false)}

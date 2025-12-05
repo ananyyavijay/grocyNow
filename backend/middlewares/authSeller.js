@@ -14,7 +14,7 @@ export const authSeller = (req, res, next) => {
     try {
         const decoded = jwt.verify(sellerToken, process.env.JWT_SECRET);
         if(decoded.email === process.env.SELLER_EMAIL){
-            next();
+            return next();
         }
     } catch (error) {
         console

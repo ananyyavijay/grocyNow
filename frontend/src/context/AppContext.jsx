@@ -1,14 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import { dummyProducts } from "../assets/assets";
-// import axios from "axios";
-// axios.defaults.withCredentials = true;
-// axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
+import axios from "axios";
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 export const AppContext = createContext(null);
 
 export const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [user, setUser] = useState(null);
   const [isSeller, setIsSeller] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
@@ -18,49 +20,53 @@ export const AppContextProvider = ({ children }) => {
 
   // check seller status
   const fetchSeller = async () => {
-    // try {
-    //   const { data } = await axios.get("/api/seller/is-auth");
-    //   if (data.success) {
-    //     setIsSeller(true);
-    //   } else {
-    //     setIsSeller(false);
-    //   }
-    // } catch (error) {
-    //   setIsSeller(false);
-    // }
+    try {
+      const { data } = await axios.get("/api/seller/seller-auth");
+      if (data.success) {
+        setIsSeller(true);
+      } else {
+        setIsSeller(false);
+      }
+    } catch (error) {
+      setIsSeller(false);
+    }
   };
 
   // fetch user auth status ,user Data and cart items
   const fetchUser = async () => {
-    // try {
-    //   const { data } = await axios.get("/api/user/is-auth");
-    //   if (data.success) {
-    //     setUser(data.user);
-    //     setCartItems(data.user.cart);
-    //   } else {
-    //     toast.error(data.message);
-    //   }
-    // } catch (error) {
-    //   toast.error(error.message);
-    // }
-  };
+  try {
+    const { data } = await axios.get("/api/user/is-auth");
+
+    if (data.success) {
+      setUser(data.user);
+      setCartItems(data.user.cartItems || {});
+    } else {
+      toast.error(data.message);
+    }
+
+  } catch (error) {
+    if (error.response?.status === 401) {
+      setUser(null);
+      setCartItems({});
+      return;
+    }
+    console.error("Error in fetchUser:", error);
+    toast.error("Something went wrong");
+  }
+};
 
   // fetch products
-  // const fetchProducts = async () => {
-  //   try {
-  //     const { data } = await axios.get("/api/product/list");
-  //     if (data.success) {
-  //       setProducts(data.products);
-  //     } else {
-  //       toast.error(data.message);
-  //     }
-  //   } catch (error) {
-  //     toast.error(error.message);
-  //   }
-  // };
-
   const fetchProducts = async () => {
-    setProducts(dummyProducts);
+    try {
+      const { data } = await axios.get("/api/product/list");
+      if (data.success) {
+        setProducts(data.products);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   
   // add product to cart
@@ -115,29 +121,40 @@ export const AppContextProvider = ({ children }) => {
       setCartItems(cartData);
     }
   };
+  // useEffect(() => {
+  //   fetchSeller();
+  //   fetchProducts();
+  //   fetchUser();
+  // }, []);
   useEffect(() => {
-    // fetchSeller();
-    fetchProducts();
-    // fetchUser();
-  }, []);
+  fetchSeller();
+  fetchProducts();
 
-  // update database cart items
+  if (!location.pathname.startsWith("/seller")) {
+    fetchUser();
+  }
+}, [location.pathname]);
+
+
+   // update database cart items
   useEffect(() => {
     const updateCart = async () => {
-      //   try {
-      //     const { data } = await axios.post("/api/cart/update", { cartItems });
-      //     if (!data.success) {
-      //       toast.error(data.message);
-      //     }
-      //   } catch (error) {
-      //     toast.error(error.message);
-      //   }
+      try {
+        const { data } = await axios.post("/api/cart/update", { cartItems });
+
+        if (!data.success) {
+          toast.error(data.message);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
     };
 
     if (user) {
       updateCart();
     }
-  }, [cartItems]);
+  }, [cartItems, user]);
+  
   const value = {
     navigate,
     user,
@@ -155,7 +172,7 @@ export const AppContextProvider = ({ children }) => {
     setSearchQuery,
     cartCount,
     totalCartAmount,
-    // axios,
+    axios,
     fetchProducts,
     setCartItems,
   };

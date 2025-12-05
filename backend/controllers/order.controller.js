@@ -75,7 +75,7 @@ export const getAllOrders = async (req, res) => {
     try {
         const orders = await Order.find({
             $or: [
-                {paymentType: "COD"}, {isPaid: true}
+                {paymentType: "COD"}, {isPaid: false}
             ],
         }) 
         .populate("items.product address") 

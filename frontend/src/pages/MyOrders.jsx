@@ -5,26 +5,26 @@ import toast from "react-hot-toast";
 
 const MyOrders = () => {
   const [myOrders, setMyOrders] = useState([]);
-  // const { axios, user } = useContext(AppContext);
+  const { axios, user } = useContext(AppContext);
   const fetchOrders = async () => {
-    setMyOrders(dummyOrders);
-    // try {
-    //   const { data } = await axios.get("/api/order/user");
-    //   if (data.success) {
-    //     setMyOrders(data.orders);
-    //   } else {
-    //     toast.error(data.message);
-    //   }
-    // } catch (error) {
-    //   toast.error(error.message);
-    // }
+    setMyOrders([]);
+    try {
+      const { data } = await axios.get("/api/order/user");
+      if (data.success) {
+        setMyOrders(data.orders);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   useEffect(() => {
     fetchOrders();
-    // if (user) {
-    //   fetchOrders();
-    // }
+    if (user) {
+      fetchOrders();
+    }
   }, []);
   return (
     <div className="mt-12 pb-16 ml-20">
@@ -52,8 +52,7 @@ const MyOrders = () => {
               <div className="flex items-center mb-4 md:mb-0">
                 <div className="p-4 rounded-lg">
                   <img
-                    // src={`http://localhost:5000/images/${item.product.image[0]}`}
-                     src={item.product.image[0]}
+                    src={`http://localhost:5000/images/${item.product.image[0]}`}
                     alt=""
                     className="w-16 h-16"
                   />

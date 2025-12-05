@@ -1,9 +1,8 @@
-
 import toast from "react-hot-toast";
 import { useAppContext } from "../../context/AppContext";
 import { useState, useEffect } from "react";
 const SellerLogin = () => {
-  const { isSeller, setIsSeller, navigate} = useAppContext();
+  const { isSeller, setIsSeller, navigate, axios} = useAppContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   useEffect(() => {
@@ -12,28 +11,25 @@ const SellerLogin = () => {
     }
   }, [isSeller]);
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSeller(true);
-    // try {
-    //   e.preventDefault();
-    //   const { data } = await axios.post("/api/seller/login", {
-    //     email,
-    //     password,
-    //   });
-    //   if (data.success) {
-    //     setIsSeller(true);
-    //     navigate("/seller");
-    //   } else {
-    //     toast.error(data.message);
-    //   }
-    // } catch (error) {
-    //   toast.error(error.message);
-    // }
+    try {
+      e.preventDefault();
+      const { data } = await axios.post("/api/seller/seller-login", {
+        email,
+        password,
+      });
+      if (data.success) {
+        setIsSeller(true);
+        navigate("/seller");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
   return (
     !isSeller && (
       <div 
-      onClick={() => setshowUserLogin(false)}
       className="fixed top-0 left-0 bottom-0 right-0 z-30 flex items-center justify-center  bg-black/50 text-gray-600">
         <form
           onSubmit={handleSubmit}

@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     },
     cartItems: { type: Object, default: {} },
   },
-  {minimise: false} //tells Mongoose do not remove empty objects, keep them exactly as they are.
+  {minimize: false} //tells Mongoose do not remove empty objects, keep them exactly as they are.
 );
 
 const User = mongoose.model("User", userSchema);

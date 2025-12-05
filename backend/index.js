@@ -34,6 +34,7 @@ app.get("/", (req, res) => {
     res.send("let's buy!")
 });
 
+app.use("/images", express.static("uploads"))
 app.use("/api/user", userRoutes);
 app.use("/api/seller", sellerRoutes);
 app.use("/api/product", productRoutes);

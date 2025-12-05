@@ -3,10 +3,9 @@ const Footer = () => {
     <div className="text-gray-500/80 pt-8 px-6 md:px-16 lg:px-24 xl:px-32">
       <div className="flex flex-wrap justify-between gap-12 md:gap-6">
         <div className="max-w-80">
-          <h1 className="text-3xl font-semibold text-[#212121]">Grocery App</h1>
+          <h2 className="text-blue-900 text-4xl font-bold text-primary">Grocy<span className="text-green-800">Now</span></h2>
           <p className="text-sm">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
+            Powered by Speed & Freshness
           </p>
           <div className="flex items-center gap-3 mt-4">
             {/* Instagram */}

@@ -2,6 +2,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import { useAppContext } from "../../context/AppContext";
 import toast from "react-hot-toast";
+
 const SellerLayout = () => {
   const { isSeller, setIsSeller, axios, navigate } = useAppContext();
   const sidebarLinks = [
@@ -16,7 +17,7 @@ const SellerLayout = () => {
 
   const logout = async () => {
     try {
-      const { data } = await axios.get("/api/seller/logout");
+      const { data } = await axios.get("/api/seller/seller-logout");
       if (data.success) {
         setIsSeller(false);
         toast.success("Logged out successfully");
@@ -31,7 +32,7 @@ const SellerLayout = () => {
     <>
       <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 bg-white transition-all duration-300">
         <Link to={"/"}>
-          <h1 className="text-2xl font-semibold">Grocery Store App</h1>
+          <h2 className="text-blue-900 text-3xl font-bold text-primary">Grocy<span className="text-green-800">Now</span></h2>
         </Link>
         <div className="flex items-center gap-5 text-gray-500">
           <p>Hi! Admin</p>

@@ -39,7 +39,7 @@ const Navbar = () => {
   return (
     <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
       <Link to="/">
-        <h2 className="text-2xl font-bold text-primary">Grocery App</h2>
+        <h2 className="text-blue-900 text-2xl font-bold text-primary">Grocy<span className="text-green-800">Now</span></h2>
       </Link>
 
       {/* Desktop Menu */}

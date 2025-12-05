@@ -62,6 +62,7 @@ const Cart = () => {
       getCart();
     }
   }, [products, cartItems]);
+  
   const placeOrder = async () => {
     try {
       if (!selectedAddress) {
@@ -117,7 +118,7 @@ const Cart = () => {
               >
                 <img
                   className="max-w-full h-full object-cover"
-                  src={product.image[0]}
+                  src={`http://localhost:5000/images/${product.image[0]}`}
                   alt={product.name}
                 />
               </div>
