@@ -1,8 +1,8 @@
 import React from "react";
 import Hero from "../components/Hero.jsx";
 import Category from "../components/Category.jsx";
-import BestSeller from "../components/Bestseller.jsx";
-import NewsLetter from "../components/Newsletter.jsx";
+import BestSeller from "../components/BestSeller.jsx";
+import NewsLetter from "../components/NewsLetter.jsx";
 
 const Home = () => {
   return (
