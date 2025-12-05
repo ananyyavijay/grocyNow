@@ -2,7 +2,7 @@ import React from "react";
 import Hero from "../components/Hero.jsx";
 import Category from "../components/Category.jsx";
 import BestSeller from "../components/BestSeller.jsx";
-import NewsLetter from "../components/NewsLetter.jsx";
+import NewsLetter from "../components/Newsletter.jsx";
 
 const Home = () => {
   return (
