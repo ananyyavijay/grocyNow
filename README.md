@@ -42,8 +42,12 @@ It allows users to browse daily essentials, add to cart, choose delivery address
 ## Environment Variables
 
 MONGODB_URI=your_mongo_url
+
 JWT_SECRET=your_secret_key
+
 SELLER_EMAIL=admin@example.com
+
 SELLER_PASSWORD=your_password
+
 NODE_ENV=development
 
