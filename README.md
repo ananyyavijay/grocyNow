@@ -51,3 +51,16 @@ SELLER_PASSWORD=your_password
 
 NODE_ENV=development
 
+---
+
+## 🌍 Live Deployment
+
+| Application | Platform | URL |
+|------------|----------|-----|
+| Frontend | Vercel | https://grocy-now.vercel.app |
+| Backend API | Render | https://grocynow.onrender.com |
+
+
+
+
+
