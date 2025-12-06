@@ -13,7 +13,7 @@ const SellerLogin = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const { data } = await axios.post("/api/seller/seller-login", {
+      const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/seller/seller-login`, {
         email,
         password,
       });
