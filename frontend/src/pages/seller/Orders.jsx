@@ -38,9 +38,7 @@ const Orders = () => {
               <div key={index} className="flex items-center gap-3">
                 <img
                   className="w-12 h-12 object-cover"
-                  src={`${import.meta.env.VITE_BACKEND_URL}/images/${
-                    item.product.image[0]
-                  }`}
+                  src={`${import.meta.env.VITE_BACKEND_URL}/images/${item.product.image[0]}`}
                   alt={item.product.name}
                 />
 
